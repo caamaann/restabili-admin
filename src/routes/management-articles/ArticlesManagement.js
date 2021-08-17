@@ -44,7 +44,7 @@ const ArticlesManagement = () => {
         <div>
             <h2 className='sub-title'>Article Management</h2>
             <div className='separator'></div>
-            <ButtonComponent id='create-button' class='btn btn-success mb-4' text='Create Article' click={() => onClickCreate(SLUGS.createArticle)} />           
+            <ButtonComponent id='create-button' class='btn btn-md btn-success mb-4' text='Create Article' click={() => onClickCreate(SLUGS.createArticle)} />           
             <div className='row'>          
                 {
                     articles.map(data => (

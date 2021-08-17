@@ -137,7 +137,7 @@ function HeaderComponent() {
                 <DropdownComponent
                     label={
                         <>
-                            <span className={classes.name}>User Name</span>
+                            <span className={classes.name}>Admin</span>
                             <img
                                 src='https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png'
                                 alt='avatar'

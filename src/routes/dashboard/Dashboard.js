@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { createUseStyles } from 'react-jss';
+import { Pie, Line } from 'react-chartjs-2';
+import '../../assets/styles/styles.css';
 
 const useStyles = createUseStyles({
     cardsContainer: {
@@ -41,67 +43,132 @@ const useStyles = createUseStyles({
     }
 });
 
+
+
 const Dashboard = () => {
     const classes = useStyles();
+    const [roomData, setRoomData] = useState({});
+    const [userData, setUserData] = useState({});
+    const [onlineData, setOnlineData] = useState({});
+    const [registeredData, setRegisteredData] = useState({});
+    const [postsData, setPostsData] = useState({});
+
+    const roomChart = () => {
+        setRoomData({
+            labels: [
+                'Active Room',
+                'Nonactive Room'
+              ],
+              datasets: [{
+                label: 'Status Room Chat',
+                data: [100, 50],
+                backgroundColor: [
+                  '#6c63ff',
+                  '#ffc000',
+                ],
+                hoverOffset: 4
+              }]
+        })
+    }
+
+    const UserChart = () => {
+        setUserData({
+            labels: [
+                'Participants',
+                'Doctors'
+              ],
+              datasets: [{
+                label: 'Status Room Chat',
+                data: [50, 8],
+                backgroundColor: [
+                  '#6c63ff',
+                  '#ffc000',
+                ],
+                hoverOffset: 4
+              }]
+        })
+    }
+
+    const OnlineChart = () => {
+        setOnlineData({
+            labels: [
+                'Online Users',
+                'Offline Users'
+              ],
+              datasets: [{
+                label: 'Status Room Chat',
+                data: [11, 30],
+                backgroundColor: [
+                  '#6c63ff',
+                  '#ffc000',
+                ],
+                hoverOffset: 4
+              }]
+        })
+    }
+
+    const registeredUserChart = () => {
+        setRegisteredData({
+            labels: ['January', 'February', 'Maret', 'April', 'Mei', 'June', 'Juli', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+              label: 'Resgistered User',
+              data: [0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0],
+              fill: false,
+              borderColor: '#6c63ff',
+              tension: 0.1
+            }]
+          })
+    }
+
+    const postsUserChart = () => {
+        setPostsData({
+            labels: ['January', 'February', 'Maret', 'April', 'Mei', 'June', 'Juli', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+              label: 'User Posts',
+              data: [0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0],
+              fill: false,
+              borderColor: '#ffc000',
+              tension: 0.1
+            }]
+          })
+    }
+
+    useEffect(() => {
+        roomChart();
+        UserChart();
+        OnlineChart();
+        registeredUserChart();
+        postsUserChart();
+    }, [])
+
     return (
-        // <Column>
-        //     <Row
-        //         className={classes.cardsContainer}
-        //         wrap
-        //         flexGrow={1}
-        //         horizontal='space-between'
-        //         breakpoints={{ 768: 'column' }}
-        //     >
-        //         <Row
-        //             className={classes.cardRow}
-        //             wrap
-        //             flexGrow={1}
-        //             horizontal='space-between'
-        //             breakpoints={{ 384: 'column' }}
-        //         >
-        //             <MiniCardComponent
-        //                 className={classes.miniCardContainer}
-        //                 title='Unresolved'
-        //                 value='60'
-        //             />
-        //             <MiniCardComponent
-        //                 className={classes.miniCardContainer}
-        //                 title='Overdue'
-        //                 value='16'
-        //             />
-        //         </Row>
-        //         <Row
-        //             className={classes.cardRow}
-        //             wrap
-        //             flexGrow={1}
-        //             horizontal='space-between'
-        //             breakpoints={{ 384: 'column' }}
-        //         >
-        //             <MiniCardComponent
-        //                 className={classes.miniCardContainer}
-        //                 title='Open'
-        //                 value='43'
-        //             />
-        //             <MiniCardComponent
-        //                 className={classes.miniCardContainer}
-        //                 title='On hold'
-        //                 value='64'
-        //             />
-        //         </Row>
-        //     </Row>
-        //     <div className={classes.todayTrends}>
-        //         <TodayTrendsComponent />
-        //     </div>
-        //     <Row
-        //         horizontal='space-between'
-        //         className={classes.lastRow}
-        //         breakpoints={{ 1024: 'column' }}
-        //     >
-        //         <UnresolvedTicketsComponent containerStyles={classes.unresolvedTickets} />
-        //         <TasksComponent containerStyles={classes.tasks} />
-        //     </Row>
-        // </Column>
-        <div>Dashboard Section</div>
+        <div>
+            <div className='row'>
+                <div className='col-md-4'>
+                    <div>
+                        <Pie data={roomData}/>
+                    </div>
+                </div>
+                <div className='col-md-4'>
+                    <div>
+                        <Pie data={userData}/>
+                    </div>
+                </div>
+                <div className='col-md-4'>
+                    <div>
+                        <Pie data={onlineData}/>
+                    </div>
+                </div>
+            </div>
+            <div className='row mt-5'>
+                <div className='col-md-6'>
+                    <Line data={registeredData} />
+                </div>
+                <div className='col-md-6'>
+                    <Line data={postsData} />
+                </div>
+            </div>
+        </div>
     );
 }
 
